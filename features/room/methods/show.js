@@ -10,4 +10,4 @@ module.exports = async (req, res, next) => {
     console.error(ex);
     return res.status(ex.status).send({ message: ex.message });
   }
-}
+};

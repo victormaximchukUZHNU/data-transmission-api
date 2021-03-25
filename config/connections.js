@@ -4,4 +4,4 @@ module.exports = {
     development: 'http://localhost:8080',
     production: ''
   }
-}
+};
