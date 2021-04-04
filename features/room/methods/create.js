@@ -2,7 +2,9 @@ const createRoom = require('../services/create');
 
 module.exports = async (req, res, next) => {
   try {
-    const room = await createRoom();
+    const { password } = req.body;
+
+    const room = await createRoom(password);
 
     res.status(200).send(room);
   } catch (ex) {

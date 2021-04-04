@@ -14,10 +14,14 @@ module.exports = (http) => {
   });
 
   socketIO.on('connection', (socket) => {
-    socket.on('chat connected', (roomId) => {
+    socket.on('chatConnected', (roomId) => {
       socket.join(roomId);
-    })
-  
+    });
+
+    socket.on('participantConnected', (params) => {
+      socket.to(params.roomId).emit('participantConnected', params.senderId);
+    });
+    
     socket.on('message', (params) => {
       socket.to(params.roomId).emit('message', { 
         message: params.message,

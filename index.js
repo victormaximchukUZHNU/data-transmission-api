@@ -1,5 +1,6 @@
 const { DB_URL } = require('./config/connections');
 
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 
@@ -10,6 +11,7 @@ const http = require('http').Server(app);
 const router = require('./router');
 const chat = require('./sockets/chat.socket');
 
+app.use(bodyParser.json());
 app.use(cors());
 app.use(router);
 
