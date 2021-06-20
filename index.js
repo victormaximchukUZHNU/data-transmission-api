@@ -1,4 +1,5 @@
 const { DB_URL } = require('./config/connections');
+const clientHost = require('./config/connections').CLIENT_URL[process.env.NODE_ENV];
 
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -12,8 +13,12 @@ const router = require('./router');
 const chat = require('./sockets/chat.socket');
 
 app.use(bodyParser.json());
+
+app.use(cors({
+  origin: clientHost
+}));
+
 app.use(router);
-app.use(cors());
 
 chat(http);
 
