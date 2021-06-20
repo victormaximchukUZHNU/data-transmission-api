@@ -12,8 +12,8 @@ const router = require('./router');
 const chat = require('./sockets/chat.socket');
 
 app.use(bodyParser.json());
-app.use(cors());
 app.use(router);
+app.use(cors());
 
 chat(http);
 
