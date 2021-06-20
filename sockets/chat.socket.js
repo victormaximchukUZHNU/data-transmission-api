@@ -19,14 +19,35 @@ module.exports = (http) => {
     });
 
     socket.on('participantConnected', (params) => {
-      socket.to(params.roomId).emit('participantConnected', params.senderId);
+      socket.to(params.roomId).emit('participantConnected', params);
+    });
+
+    socket.on('participantDisconnected', (params) => {
+      socket.to(params.roomId).emit('participantDisconnected', params.senderId);
     });
     
     socket.on('message', (params) => {
-      socket.to(params.roomId).emit('message', { 
-        message: params.message,
-        senderId: params.senderId
-      });
+      socket.to(params.roomId).emit('message', params);
+    });
+
+    socket.on('videoChatOffer', (params) => {
+      socket.to(params.roomId).emit('videoChatOffer', params);
+    });
+
+    socket.on('videoChatAnswer', (params) => {
+      socket.to(params.roomId).emit('videoChatAnswer', params);
+    });
+
+    socket.on('newICECandidate', (params) => {
+      socket.to(params.roomId).emit('newICECandidate', params);
+    });
+
+    socket.on('cameraAction', (params) => {
+      socket.to(params.roomId).emit('cameraAction', params);
+    });
+
+    socket.on('microphoneAction', (params) => {
+      socket.to(params.roomId).emit('microphoneAction', params);
     });
   });
 };
